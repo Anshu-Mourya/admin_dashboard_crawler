@@ -1,13 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import {
-  BrowserRouter,
-  Navigate,
-  Outlet,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./index.css";
 import "./styles/colors.css";
 
@@ -36,8 +30,10 @@ root.render(
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/about" element={<About />} />
+            <Route element={<HomePage />}>
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/about" element={<About />} />
+            </Route>
             <Route path="/edu">
               <Route index element={<LearningApp />} />
               <Route path="dashboard" element={<FitnessDashBoard />} />

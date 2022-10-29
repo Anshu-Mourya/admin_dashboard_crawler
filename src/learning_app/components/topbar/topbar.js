@@ -1,27 +1,24 @@
-import { Search } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import {
-  Autocomplete,
   Button,
   Divider,
   Link as LN,
   List,
   ListItem,
   SwipeableDrawer,
-  TextField,
   Typography,
 } from "@mui/material";
 
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SearchBoxLearningApp from "../SearchBoxLearningApp";
 import "./topbar.css";
 
 export default function Topbar() {
   const [state, setState] = useState(false);
   const [innerWidth, setinnerWidth] = useState(window.innerWidth);
-  const [searchFieldFocus, setSearchFieldFocus] = useState(false);
   const breakPoint = 675;
   const toggleDrawer = (open) => (event) => {
     if (
@@ -145,33 +142,8 @@ export default function Topbar() {
               </li>
             </Link>
             <li>
-              <Autocomplete
-                freeSolo
-                disableClearable
-                options={[]}
-                sx={{ display: { xs: "none", lg: "block" } }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Search Courses"
-                    style={{ width: "200px", color: "var(--text-color)" }}
-                    InputProps={{
-                      ...params.InputProps,
-                      type: "search",
-                    }}
-                    onKeyDown={(ev) => {
-                      if (ev.key === "Escape" && searchFieldFocus) {
-                        setSearchFieldFocus(false);
-                        return;
-                      }
-                      return;
-                    }}
-                    onClick={() => setSearchFieldFocus(true)}
-                    focused={searchFieldFocus}
-                  />
-                )}
-              />
-              <Button
+              <SearchBoxLearningApp />
+              {/* <Button
                 style={{
                   paddingTop: "10px",
                 }}
@@ -179,20 +151,12 @@ export default function Topbar() {
                 onClick={() => setSearchFieldFocus(!searchFieldFocus)}
               >
                 <Search />
-              </Button>
+              </Button> */}
             </li>
           </ul>
 
           <Box sx={{ display: innerWidth <= breakPoint ? "flex" : "none" }}>
-            <Button
-              className="menuButton"
-              style={{
-                paddingTop: "10px",
-              }}
-              // onClick={}
-            >
-              <Search />
-            </Button>
+            <SearchBoxLearningApp />
             <Button
               className="menuButton"
               style={{

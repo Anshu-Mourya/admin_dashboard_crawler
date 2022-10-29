@@ -1,35 +1,80 @@
-import {
-  BookOutlined,
-  FitnessCenterOutlined,
-  HomeOutlined,
-  Person2Outlined,
-  PhoneOutlined,
-} from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Divider,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  Input,
-  InputLabel,
-  List,
-  ListItem,
-  styled,
-  Typography,
-} from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+import { Box, Button, createTheme, Divider, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import MenuIcon from "../assets/MenuIcon";
-import TopAppBar from "../components/appbar";
-import BlurDesign from "../components/BlurDesign";
-import AppDrawer from "../components/drawer";
+import React, { useEffect, useId, useState } from "react";
+import "../styles/form.css";
+
+/**
+ *
+ * @param {{label: string, value: string, type: React.HTMLInputTypeAttribute }} param0
+ * @returns
+ */
+const InputField = ({ label, value, onChange, type }) => {
+  const id = useId();
+  const [focus, setFocus] = useState(false);
+
+  return (
+    <div className={"input-container" + (focus ? " focus" : "")}>
+      <label htmlFor={id} className={focus ? "focus" : ""}>
+        {label}
+      </label>
+      <input
+        id={id}
+        value={value}
+        type={type}
+        onChange={onChange}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
+      />
+    </div>
+  );
+};
+
+const InputFieldTextArea = ({ label, value, onChange, type }) => {
+  const id = useId();
+  const [focus, setFocus] = useState(false);
+  const [newHeight, setHeight] = useState("40px");
+
+  useEffect(() => {
+    console.log(newHeight);
+  });
+
+  return (
+    <div
+      className={"input-container" + (focus ? " focus" : "")}
+      style={{
+        height: newHeight,
+      }}
+    >
+      <label htmlFor={id} className={focus ? "focus" : ""}>
+        {label}
+      </label>
+      <textarea
+        id={id}
+        value={value}
+        type={type}
+        onChange={onChange}
+        onFocus={() => {
+          setFocus(true);
+          setHeight("250px");
+        }}
+        onBlur={() => {
+          setFocus(false);
+          setHeight("40px");
+        }}
+      />
+    </div>
+  );
+};
+
+const theme = createTheme({
+  palette: {
+    primary: { main: "#fff" },
+    BtnColor: { main: "rgb(65, 53, 202)" },
+  },
+});
 
 const ContactUs = () => {
-  const [drawerOpenState, setDrawerOpenState] = useState(false);
-
   useEffect(() => {
     document.title = "Contact Us | Admin Dashboard Crawler";
     document.body.style.background = "#14162E";
@@ -38,152 +83,76 @@ const ContactUs = () => {
     };
   });
 
-  const StyledLinkBox = styled(Box)((theme) => ({
-    color: "white",
-    textDecoration: "none",
-  }));
-  const NavBarListItem = ({ title, link }) => {
-    return (
-      <ListItem
-        sx={{
-          "&:after": {
-            content: "''",
-            position: "absolute",
-            bottom: "0px",
-            width: "100%",
-            height: "2px",
-            transform: "scaleX(0)",
-            background: "pink",
-            left: "0",
-            transition: "0.5s",
-          },
-          "&:hover:after": {
-            transform: "scaleX(0.8)",
-          },
-        }}
-      >
-        <Link to={link}>
-          <StyledLinkBox>{title}</StyledLinkBox>
-        </Link>
-      </ListItem>
-    );
-  };
-
-  const navbarListItems = [
-    { title: "Home", link: "/", icon: <HomeOutlined /> },
-    { title: "Learning", link: "/edu", icon: <BookOutlined /> },
-    { title: "Fitness", link: "/fitness", icon: <FitnessCenterOutlined /> },
-    { title: "About", link: "/about", icon: <Person2Outlined /> },
-    { title: "Contact", link: "/contact-us", icon: <PhoneOutlined /> },
-  ];
   return (
-    <>
-      <AppDrawer
-        state={drawerOpenState}
-        onOpen={() => setDrawerOpenState(true)}
-        onClose={() => setDrawerOpenState(false)}
-        listItems={navbarListItems}
-      />
-      <Box
+    <ThemeProvider theme={theme}>
+      <Stack
         sx={{
-          width: "100%",
-          minHeight: "100vh",
-          background: "#14162E",
-          position: "relative",
+          maxWidth: "400px",
+          position: {
+            md: "static",
+          },
+          top: "0",
+          alignItems: "center",
+          marginY: { xs: 2, md: 4 },
+          paddingY: {
+            xs: 8,
+            md: 4,
+          },
+          marginX: "auto",
+          background: "rgba(255,255,255, 0.0)",
+          backdropFilter: "blur(5px)",
+          border: "1px solid #ffffff02",
+          boxSizing: "border-box",
+          borderRadius: {
+            xs: 0,
+            md: 4,
+          },
+          boxShadow: "0 0 12px 2px rgba(0,0,0, 0.2)",
+          zIndex: "1",
         }}
       >
-        <BlurDesign />
-        <TopAppBar
-          title={"Admin Dashboard Crawler"}
-          background="#14162E"
-          logo={false}
-          url="/"
-          centered={true}
-        >
-          <Box component="nav" sx={{ display: { xs: "none", md: "block" } }}>
-            <List sx={{ display: "inline-flex" }}>
-              {navbarListItems.map(({ title, link }) => (
-                <NavBarListItem title={title} link={link} key={title} />
-              ))}
-            </List>
-          </Box>
-          <Button
-            sx={{ display: { xs: "flex", md: "none" } }}
-            onClick={() => setDrawerOpenState(!drawerOpenState)}
-          >
-            <MenuIcon size={0.5} color="#6F3AFA" />
-          </Button>
-        </TopAppBar>
-        <Box>
-          <Stack
-            sx={{
-              width: {
-                xs: "100%",
-                md: "calc(100% - 10%)",
-              },
-              position: {
-                xs: "absolute",
-                md: "static",
-              },
-              top: "0",
-              height: {
-                xs: "100vh",
-                md: "700px",
-              },
-              alignItems: "center",
-              marginTop: { xs: 0, md: 4 },
-              paddingY: 4,
-              paddingTop: {
-                xs: 12,
-                md: 4,
-              },
-              marginX: "auto",
-              background: "rgba(255,255,255, 0.0)",
-              backdropFilter: "blur(5px)",
-              border: "1px solid #ffffff02",
-              boxSizing: "border-box",
-              borderRadius: {
-                xs: 0,
-                md: 4,
-              },
-              boxShadow: "0 0 12px 2px rgba(0,0,0, 0.2)",
-              zIndex: "1",
-            }}
-          >
-            <Typography
-              variant="h5"
-              component="h1"
-              fontWeight="bold"
-              color="#fff"
-            >
-              Contact Us
-            </Typography>
+        <Typography variant="h5" component="h1" fontWeight="bold" color="#fff">
+          Contact Us
+        </Typography>
 
-            <Stack
-              direction="row"
-              divider={<Divider orientation="vertical" flexItem />}
-              sx={{
-                width: "calc(100% - 20px)",
+        <Stack
+          direction="row"
+          divider={<Divider orientation="vertical" flexItem />}
+          sx={{
+            width: "calc(100% - 20px)",
+          }}
+        >
+          <Box sx={{ width: "100%", marginTop: "24px", color: "white" }}>
+            <form
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <Box>
-                <FormControl>
-                  <InputLabel htmlFor="my-input">Email address</InputLabel>
-                  <Input
-                    required
-                    id="Email Address"
-                    aria-describedby="Email Address"
-                  />
-                  {/* <FormHelperText id="my-helper-text">
-                      We'll never share your email.
-                    </FormHelperText> */}
-                </FormControl>
-              </Box>
-            </Stack>
-          </Stack>
-        </Box>
-      </Box>
-    </>
+              <InputField label="Email: " type={"email"} />
+              <InputFieldTextArea label="Describe Your Query: " type={"text"} />
+              <Button
+                variant="contained"
+                color="BtnColor"
+                sx={{
+                  width: "calc(100% - 80px)",
+                  marginTop: "24px",
+                  transition: "0.2s",
+                  "&:active": {
+                    scale: "0.95",
+                  },
+                }}
+              >
+                Submit
+              </Button>
+            </form>
+          </Box>
+        </Stack>
+      </Stack>
+    </ThemeProvider>
   );
 };
 

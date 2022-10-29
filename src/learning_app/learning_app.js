@@ -1,7 +1,7 @@
 import { Forward } from "@mui/icons-material";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { Component, createRef, useEffect } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "../styles/colors.css";
 import Container from "./components/Container";
@@ -75,41 +75,6 @@ function CardComponent({ course }) {
     </Card>
   );
 }
-
-// function Footer() {
-//   function FooterSection({ title }) {
-//     return (
-//       <FooterSectionStyled>
-//         <Typography variant="h6" component={"h2"} fontWeight="bold">
-//           {title}
-//         </Typography>
-//       </FooterSectionStyled>
-//     );
-//   }
-//   return (
-//     <footer>
-//       <Box
-//         sx={{
-//           width: "100%",
-//           minHeight: "400px",
-//           display: "flex",
-//           flexDirection: { xs: "column", md: "row" },
-//           justifyContent: "space-evenly",
-//           alignItems: "flex-start",
-//           background: "var(--background-color-grad)",
-//           padding: "20px",
-//         }}
-//       >
-//         <FooterSection title="Support" />
-//         <Divider orientation="horizontal" color="var(--border-color)" />
-
-//         <FooterSection title="Community" />
-//         <Divider orientation="vertical" color="var(--border-color)" />
-//         <FooterSection title="Company" />
-//       </Box>
-//     </footer>
-//   );
-// }
 
 function LandingPage() {
   useEffect(() => {

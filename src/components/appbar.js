@@ -19,6 +19,7 @@ const TopAppBar = ({
       sx={{
         background: background ? background : "rgba(243, 243, 253, 0.8)",
         backdropFilter: "blur(2px)",
+        maxWidth: "100%",
         padding: {
           xs: "0 0px",
           sm: "0 20px",
@@ -47,7 +48,15 @@ const TopAppBar = ({
               gap: "20px",
             }}
           >
-            {logo ? <img src="/fitness/fitness_logo2.png" width="30px" /> : ""}
+            {logo ? (
+              <img
+                src="/fitness/fitness_logo2.png"
+                alt="Fitness App Logo"
+                width="30px"
+              />
+            ) : (
+              ""
+            )}
             <Typography
               variant="h6"
               component="h1"

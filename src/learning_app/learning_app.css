@@ -50,6 +50,56 @@
     width: 100%;
 }
 
+
+/* Search Box CSS */
+
+.box{
+    position: relative;
+}
+
+.input {
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 2px solid rgb(22, 120, 242);
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: white;
+    outline: none;
+    transition: .5s;
+}
+.box:hover input,
+.box input:focus {
+    width: 240px;
+    background: #3b3640;
+    border-radius: 10px;
+}
+.box .search-icon{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translate(-50%,-50%);
+    font-size: 1rem;
+    color: white;
+    transition: .2s;
+}
+.box:hover .search-icon{
+    opacity: 0;
+    z-index: -1;
+}
+
+/* Responsive UI CSS */
+
+
+
+@media screen and (max-width: 600px) {
+    .box:hover input,
+    .box input:focus {
+        width: calc(200px - 20%);
+    }
+}
 @media screen and (max-width: 375px) {
     .container .landing_header {
         position: absolute;

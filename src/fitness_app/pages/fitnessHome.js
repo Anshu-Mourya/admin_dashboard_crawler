@@ -1,14 +1,11 @@
-import { Favorite, Search } from "@mui/icons-material";
+import { Favorite } from "@mui/icons-material";
 
 import {
-  AppBar,
   Box,
-  Button,
   Chip,
   Stack,
   styled,
   ThemeProvider,
-  Toolbar,
   Typography,
 } from "@mui/material";
 
@@ -39,7 +36,7 @@ const Block1 = () => {
         width: "100%",
         padding: {
           xs: "0px 20px",
-          md: "0px 60px",
+          sm: "0px 60px",
         },
         display: "flex",
         flexDirection: "column",
@@ -174,33 +171,31 @@ const Block2 = () => {
         >
           features we provide
         </Typography>
-        <Box>
-          <Typography
-            // variant="h3"
-            component={"h3"}
-            fontWeight="600"
-            width="400px"
-            lineHeight={1.2}
-            sx={{
-              fontSize: {
-                sm: "2rem",
-                md: "3rem",
-              },
-            }}
-          >
-            Calculating BMI is easier{" "}
-          </Typography>
-          <img
-            alt="heart beat"
-            src={HeartSvg}
-            style={{
-              width: "40px",
-              position: "relative",
-              top: "8px",
-              left: "16px",
-            }}
-          />
-        </Box>
+        <Typography
+          // variant="h3"
+          component={"h3"}
+          fontWeight="600"
+          width={"100%"}
+          maxWidth="400px"
+          lineHeight={1.2}
+          color={"var(--text-color)"}
+          fontSize={{ xs: "1.5rem", sm: "2rem", md: "3rem" }}
+        >
+          Calculating BMI is easier{" "}
+          <span>
+            <img
+              alt="heart beat"
+              src={HeartSvg}
+              style={{
+                width: "40px",
+                position: "relative",
+                top: "8px",
+                left: "16px",
+              }}
+            />
+          </span>
+        </Typography>
+
         <Typography
           variant="body1"
           component="p"
@@ -247,10 +242,10 @@ const Block2 = () => {
 const Block3 = () => {
   const ImageContainer = ({ image_name }) => {
     return (
-      <Stack sx={{ minWidth: "200px" }}>
+      <Stack sx={{ minWidth: { xs: "120px", md: "200px" } }}>
         <Box
           width="100%"
-          height="270px"
+          height={{ xs: "200px", md: "270px" }}
           sx={{
             borderRadius: "24px",
             background: `url(/fitness/${image_name}.jpeg)`,
@@ -258,7 +253,11 @@ const Block3 = () => {
             backgroundRepeat: "no-repeat",
           }}
         ></Box>
-        <Typography fontWeight="500" marginY="10px">
+        <Typography
+          fontWeight="500"
+          fontSize={{ xs: "0.8rem", md: "1rem" }}
+          marginY="10px"
+        >
           Product Name
         </Typography>
         <Typography
@@ -300,7 +299,12 @@ const Block3 = () => {
       >
         help topics
       </Typography>
-      <Typography variant="h3" component="h3" fontWeight="500" marginBottom={2}>
+      <Typography
+        fontSize={{ xs: "1.5rem", sm: "2rem", md: "3rem" }}
+        component="h3"
+        fontWeight="500"
+        marginBottom={2}
+      >
         Enhance Your Lifestyle
       </Typography>
       <Box
@@ -336,7 +340,6 @@ const FitnessHome = () => {
   });
 
   const { theme } = useOutletContext();
-  useEffect(() => console.log(theme));
 
   return (
     <ThemeProvider theme={theme}>
@@ -346,6 +349,7 @@ const FitnessHome = () => {
           minHeight: "100vh",
           position: "relative",
           background: "rgba(243, 243, 253, 1)",
+          // background: "#14162E",
         }}
       >
         <TopBar />

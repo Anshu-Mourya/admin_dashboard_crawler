@@ -6,7 +6,7 @@
     position: sticky;
     top: 0;
     z-index: 999;
-    background: rgba(11, 25, 41, 0.9);
+    background: linear-gradient(to right, #41295a, #2f0743);
     box-shadow: 0 8px 32px 0 rgba(11, 25, 41, 0.37);
     backdrop-filter: blur(4px);
     border-bottom: 1px solid rgba( 255, 255, 255, 0.18 );

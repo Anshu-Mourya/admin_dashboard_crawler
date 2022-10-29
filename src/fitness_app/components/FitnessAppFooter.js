@@ -49,7 +49,7 @@ const SocialMediaIcon = ({ icon, alt }) => {
 
 const FooterListItemSection = ({ heading, listitems }) => {
   return (
-    <Box sx={{ minWidth: "100px" }}>
+    <Box sx={{ width: "120px" }}>
       <Typography
         variant="subtitle1"
         component={"h2"}
@@ -151,7 +151,16 @@ const Footer = () => {
         borderRadius: "24px",
       }}
     >
-      <Stack direction="column" justifyContent="space-between">
+      <Stack
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "auto",
+            sm: "auto auto auto",
+            md: "auto auto auto auto auto",
+          },
+        }}
+      >
         <Box sx={{ width: "200px" }}>
           <img
             width="60px"
