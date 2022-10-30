@@ -38,7 +38,7 @@ const PersonCard = ({ person, image }) => {
             <List>
               {element.map((ele) => (
                 <ListItem key={ele}>
-                  <ListItemText>- {ele}</ListItemText>
+                  <ListItemText>{ele === "" ? "" : `- ${ele}`}</ListItemText>
                 </ListItem>
               ))}
             </List>
@@ -115,7 +115,7 @@ const About = () => {
       name: "Anshu Mourya",
       image_url: "/about/anshu-mourya.jpg",
       details: {
-        contributions: ["Fitness App", "Learning App"],
+        contributions: ["Fitness App", "Learning App", ""],
       },
       offset: "-16px 0px",
     },
@@ -132,7 +132,7 @@ const About = () => {
       >
         <span style={{ color: "#005eac" }}>INDORE </span>
         <span style={{ color: "#005eac" }}>INSTITUTE </span>
-        <span>OF </span>
+        <span style={{ color: "#fff" }}>OF </span>
         <span style={{ color: "#feb740" }}>SCIENCE </span>
         <span style={{ color: "#feb740" }}>TECHNOLOGY</span>
       </Typography>
@@ -165,20 +165,22 @@ const About = () => {
           },
         }}
       >
-        {personInfos.map((person) => (
-          <PersonCard
-            key={person.name}
-            person={person}
-            image={
-              <img
-                src={person.image_url}
-                width="100%"
-                alt="Aarti Patidar"
-                style={{ translate: person.offset, scale: person.scale }}
-              />
-            }
-          />
-        ))}
+        {personInfos
+          .sort((person1, person2) => person1.name.localeCompare(person2.name))
+          .map((person) => (
+            <PersonCard
+              key={person.name}
+              person={person}
+              image={
+                <img
+                  src={person.image_url}
+                  width="100%"
+                  alt={person.name}
+                  style={{ translate: person.offset, scale: person.scale }}
+                />
+              }
+            />
+          ))}
       </Stack>
     </>
   );

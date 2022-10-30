@@ -1,16 +1,19 @@
 import { Forward } from "@mui/icons-material";
-import { Box, Card, CardContent, Typography } from "@mui/material";
-import { Component, createRef, useEffect } from "react";
+import {
+  Box,
+  Card,
+  CardContent,
+  createTheme,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
+import { Component, createRef, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import "../styles/colors.css";
 import Container from "./components/Container";
-import Topbar from "./components/topbar/topbar";
+import Topbar from "./components/LearningAppTopBar";
 import "./learning_app.css";
-
-// const FooterSectionStyled = styled(Box)((theme) => ({
-//   color: "white",
-// }));
 
 function CardComponent({ course }) {
   const { title, content, imgUrl, dateTime } = course;
@@ -118,16 +121,30 @@ function LandingPage() {
   return (
     <>
       <Container>
-        <div className="landing_header">
-          <h1>To learn is best</h1>
-          <p>
+        <Box
+          sx={{
+            position: "relative",
+            maxWidth: "calc(100% - 100px)",
+            top: "100px",
+            left: "20px",
+            zIndex: "1",
+          }}
+        >
+          <Typography variant="h3" fontWeight={"bold"}>
+            To Learn is best
+          </Typography>
+          <Typography
+            maxWidth="100%"
+            height="200px"
+            sx={{ wordBreak: "keep-all" }}
+          >
             The capacity to learn is a gift. The ability to learn is a skill.
             The willingliness to learn is a choice.
-          </p>
-        </div>
-        <div className="illustration_container">
+          </Typography>
+        </Box>
+        <Box width={{ xs: "1000px" }} className="illustration_container">
           <img src="/learning/illustration_learn.png" alt="illustration" />
-        </div>
+        </Box>
       </Container>
       <main>
         <Box
@@ -166,19 +183,22 @@ function LandingPage() {
   );
 }
 
-class LearningApp extends Component {
-  ref = createRef();
+const theme = createTheme({
+  typography: {
+    fontFamily: "Poppins",
+  },
+});
 
-  render() {
-    return (
-      <>
-        <div className="learning_app" ref={this.ref}>
-          <Topbar />
-          <LandingPage />
-        </div>
-      </>
-    );
-  }
-}
+const LearningApp = () => {
+  const ref = useRef();
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="learning_app" ref={ref}>
+        <Topbar />
+        <LandingPage />
+      </div>
+    </ThemeProvider>
+  );
+};
 
 export default LearningApp;

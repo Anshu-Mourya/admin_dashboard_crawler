@@ -1,11 +1,11 @@
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import BlurDesign from "../components/BlurDesign";
 import {
   AdminDashBoardDrawer,
   AdminDashBoardTopAppBar,
-} from "./AdminDashBoardTopAppBar";
+} from "../components/AdminDashBoardTopAppBar";
+import BlurDesign from "../components/BlurDesign";
 
 const HomePage = () => {
   const [drawerOpenState, setDrawerOpenState] = useState(false);

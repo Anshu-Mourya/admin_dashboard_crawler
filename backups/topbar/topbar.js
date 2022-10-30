@@ -13,7 +13,7 @@ import {
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchBoxLearningApp from "../SearchBoxLearningApp";
+import SearchBoxLearningApp from "../../src/learning_app/components/SearchBoxLearningApp";
 import "./topbar.css";
 
 export default function Topbar() {
@@ -63,7 +63,7 @@ export default function Topbar() {
         role="presentation"
       >
         <img
-          src="/logo_icon.png"
+          src="/learning/logo_icon.png"
           alt="App Logo"
           style={{ maxHeight: "100%" }}
         />
@@ -143,15 +143,6 @@ export default function Topbar() {
             </Link>
             <li>
               <SearchBoxLearningApp />
-              {/* <Button
-                style={{
-                  paddingTop: "10px",
-                }}
-                sx={{ display: { xs: "block", lg: "none" } }}
-                onClick={() => setSearchFieldFocus(!searchFieldFocus)}
-              >
-                <Search />
-              </Button> */}
             </li>
           </ul>
 

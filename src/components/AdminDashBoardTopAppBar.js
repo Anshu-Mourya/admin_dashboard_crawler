@@ -1,9 +1,9 @@
-import { Box, Button, List, ListItem, styled } from "@mui/material";
+import { Box, Button, Icon, List, ListItem, styled } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import MenuIcon from "../assets/MenuIcon";
-import TopAppBar from "../components/appbar";
-import AppDrawer from "../components/drawer";
+import TopAppBar from "./appbar";
+import AppDrawer from "./drawer";
 
 import {
   BookOutlined,
@@ -26,7 +26,7 @@ const StyledLinkBox = styled(Box)((theme) => ({
   textDecoration: "none",
 }));
 
-const NavBarListItem = ({ title, link }) => {
+const NavBarListItem = ({ title, link, setState }) => {
   return (
     <ListItem
       sx={{
@@ -46,7 +46,12 @@ const NavBarListItem = ({ title, link }) => {
         },
       }}
     >
-      <Link to={link}>
+      <Link
+        to={link}
+        onClick={() => {
+          setState(false);
+        }}
+      >
         <StyledLinkBox>{title}</StyledLinkBox>
       </Link>
     </ListItem>
@@ -84,7 +89,12 @@ export const AdminDashBoardTopAppBar = ({
       <Box component="nav" sx={{ display: { xs: "none", md: "block" } }}>
         <List sx={{ display: "inline-flex" }}>
           {navbarListItems.map(({ title, link }) => (
-            <NavBarListItem title={title} link={link} key={title} />
+            <NavBarListItem
+              title={title}
+              link={link}
+              key={title}
+              setState={setDrawerOpenState}
+            />
           ))}
         </List>
       </Box>

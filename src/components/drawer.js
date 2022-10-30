@@ -1,10 +1,4 @@
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  SwipeableDrawer,
-} from "@mui/material";
+import { Box, Drawer, List, ListItem, ListItemButton } from "@mui/material";
 
 import React from "react";
 
@@ -13,7 +7,7 @@ import { AppLogo } from "../assets/AppLogo";
 
 const AppDrawer = ({ state, onOpen, onClose, listItems }) => {
   return (
-    <SwipeableDrawer
+    <Drawer
       role={"term"}
       open={state}
       PaperProps={{
@@ -72,7 +66,7 @@ const AppDrawer = ({ state, onOpen, onClose, listItems }) => {
           ))}
         </List>
       </Box>
-    </SwipeableDrawer>
+    </Drawer>
   );
 };
 export default AppDrawer;
